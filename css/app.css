@@ -1,0 +1,111 @@
+.player-column
+{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.round-column
+{
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.round-panel
+{
+	margin: 0px;
+	border: 1px solid;
+}
+
+.round-panel-body
+{
+	padding: 0px;
+}
+
+.panel-header-text
+{
+	text-align: center;
+	font-size: 24px;
+}
+
+.cell:nth-last-child(n+2)
+{
+	border-bottom: 1px solid #000;
+}
+
+.current-round-cell:nth-last-child(n+2)
+{
+	border-bottom: 1px solid #000;
+}
+
+.players
+{
+	float:left;
+	width: 100%;
+	text-align: center;
+}
+
+.player-cell
+{
+	line-height: 80px;
+}
+
+.cell
+{
+	height: 80px;
+}
+
+.alignment-helper
+{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.cell-inner
+{
+	height: 100%;
+	width: 50%;
+	text-align: center;
+	float: left;
+	line-height: 80px;
+}
+
+.current-round-cell
+{
+	height: 80px;
+	padding-left: 5px;
+	padding-top: 10px;
+}
+
+.end-round-cell
+{
+	height: 40px;
+	text-align: center;
+}
+
+.end-round-button
+{
+	width: 100%;
+	height: 100%;
+}
+
+.current-round
+{
+	float:left;
+	width: 100%;
+}
+
+.column
+{
+	float: left;
+	width: 16%;
+}
+
+.resistance-round
+{
+	border: 1px solid #0099ff;
+}
+
+.empire-round
+{
+	border: 1px solid #ff3333;
+}

@@ -1,0 +1,106 @@
+<html>
+<head>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/resistance-tracker.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body ng-app="ResistanceTracker" ng-controller="ResistanceTrackerController">
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#setPlayersModal">Set Players</button>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 player-column" ng-show="players.length > 0">
+				<div class="panel panel-default round-panel">
+					<div class="panel-heading panel-header-text">
+						<span >Players</span>
+					</div>
+					<div class="panel-body round-panel-body">
+						<div class="players">
+							<div class="cell player-cell" ng-repeat="player in players">{{player}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 round-column" ng-repeat="round in rounds">
+				<div class="panel panel-default round-panel" ng-class="{'resistance-round panel-info' : round.winner == 'Resistance', 'empire-round panel-danger' : round.winner == 'Empire'}">
+					<div class="panel-heading panel-header-text">
+						<span >Round {{round.number}}</span>
+					</div>
+					<div class="panel-body round-panel-body">
+						<div class="cell" ng-repeat="item in round.votes">
+							<span class="cell-inner">
+								<span class="alignment-helper"></span>
+								<img ng-show="item.votedApprove" src="images/approve.png"/>
+								<img ng-hide="item.votedApprove" src="images/reject.png"/>
+							</span>
+							<span class="cell-inner">
+								<span class="alignment-helper"></span>
+								<img ng-show="item.hasGun" src="images/gun.png"/>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2" ng-show="gameActive">
+				<div class="panel panel-default round-panel">
+					<div class="panel-heading panel-header-text">
+						<span >Round {{currentRoundNumber}}</span>
+					</div>
+					<div class="panel-body round-panel-body">
+						<div class="current-round">
+							<div class="current-round-cell" ng-repeat="player in currentRound">
+								<div>
+									<input id="hasGun-{{player.name}}" type="checkbox" ng-model="player.hasGun">
+									<label for="hasGun-{{player.name}}">Has Gun</label>
+								</div>
+								<div>
+									<input id="votedApprove-{{player.name}}"type="checkbox" ng-model="player.votedApprove">
+									<label for="votedApprove-{{player.name}}">Voted Approve</label>
+								</div>
+							</div>
+							<div class="current-round-cell">
+								<div>
+									<input id="winner-resistance" type="radio" ng-model="currentRound.winner" value="Resistance">
+									<label for="winner-resistance" >Resistance</label>
+								</div>
+								<div>
+								 	<input id="winner-empire" type="radio" ng-model="currentRound.winner" value="Empire">
+								 	<label for="winner-empire">Empire</label>
+							 	</div>
+							</div>
+							<div class="cell end-round-cell">
+								<button class="btn end-round-button btn-large" ng-click="endRound()">End Round</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="setPlayersModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<label for="playerEntry">Enter player names, one per line.</label>
+					<textArea class="form-control" row="7" id="playerEntry" ng-model="playerText"></textArea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" ng-click="setPlayers()">Set Players</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
